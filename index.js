@@ -49,7 +49,18 @@ async function run() {
         res.send(result)
       })
 
-
+      app.put("/jobs/:id", async (req, res) => {
+        const { id } = req.params;
+        const { category } = req.body;
+      
+        const result = await jobsCollection.updateOne(
+          { _id: new ObjectId(id) },
+          { $set: { category } }
+        );
+      
+        res.send(result);
+      });
+      
 
   } finally {
     // Ensures that the client will close when you finish/error
